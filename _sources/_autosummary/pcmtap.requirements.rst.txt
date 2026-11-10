@@ -1,0 +1,12 @@
+pcmtap.requirements
+===================
+
+.. automodule:: pcmtap.requirements
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      check_requirements
+   

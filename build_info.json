@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "built_at": "2026-11-10T13:46:12Z",
+  "package": {
+    "name": "pcmtap",
+    "version": "0.0.1",
+    "display_name": "pcmtap",
+    "source": "pyproject.toml"
+  },
+  "git": {
+    "available": true,
+    "commit": "8855268e059acf76aecd872639810e0f965b2bfd",
+    "short_commit": "8855268",
+    "branch": "main",
+    "tags": [],
+    "dirty": false,
+    "remote_url": "https://github.com/thorwhalen/pcmtap",
+    "commit_url": "https://github.com/thorwhalen/pcmtap/commit/8855268e059acf76aecd872639810e0f965b2bfd",
+    "error": null
+  },
+  "ci": {
+    "provider": "github",
+    "repository": "thorwhalen/pcmtap",
+    "sha": "8855268e059acf76aecd872639810e0f965b2bfd",
+    "sha_in_history": true,
+    "ref": "refs/heads/main",
+    "ref_name": "main",
+    "run_id": "42827372892",
+    "run_url": "https://github.com/thorwhalen/pcmtap/actions/runs/42827372892",
+    "server_url": "https://github.com"
+  },
+  "tools": {
+    "epythet": "0.2.22",
+    "sphinx": "9.1.1",
+    "docutils": "0.22.4",
+    "python": "3.12.16"
+  },
+  "config": {
+    "theme": "auto",
+    "html_theme": "shibuya",
+    "accent": "#923240",
+    "mode": "auto",
+    "api_generator": "autosummary",
+    "ignore": [
+      "tests/",
+      "scrap/",
+      "examples/"
+    ],
+    "agent_outputs": true,
+    "aggregates": [
+      "md"
+    ],
+    "ai_artifacts": true,
+    "provenance": true,
+    "docs_dir": "docsrc"
+  },
+  "site": {
+    "modules_documented": 7,
+    "objects_documented": 58
+  },
+  "pypi": {
+    "checked": true,
+    "latest": "0.0.2",
+    "relation": "behind",
+    "error": null
+  },
+  "reproduce": "git clone https://github.com/thorwhalen/pcmtap && cd pcmtap\ngit checkout 8855268e059acf76aecd872639810e0f965b2bfd\npip install \"epythet==0.2.22\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "warnings": [],
+  "alignment": {
+    "aligned": false,
+    "notes": [
+      "The documented version (0.0.1) is behind the latest release on PyPI (0.0.2): `pip install pcmtap` gives newer code than these docs describe."
+    ]
+  }
+}

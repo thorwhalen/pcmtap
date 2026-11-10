@@ -1,0 +1,52 @@
+﻿pcmtap
+======
+
+.. automodule:: pcmtap
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      audio_processes
+      check_requirements
+      helper_path
+      peak
+      permission_status
+      record
+      request_permission
+      resolve_app
+      skip_silence
+      take_frames
+      take_seconds
+      take_until
+      write_audio
+      write_wav
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AudioFormat
+      Tap
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      HelperUnavailable
+      PermissionMissing
+      TapError
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   base
+   helper_build
+   requirements
+   stream
+   tap
+   write

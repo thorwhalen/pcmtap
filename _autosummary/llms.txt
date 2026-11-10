@@ -1,0 +1,18 @@
+# pcmtap
+
+> Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps.
+
+
+## Pages in this subsection
+
+- [pcmtap](pcmtap.html.md): Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps.
+- [pcmtap.base](pcmtap.base.html.md): &#96;record&#96;: what an app (or the whole Mac) plays, into an audio file, in one call.
+- [pcmtap.helper_build](pcmtap.helper_build.html.md): Find or build the native helper (&#96;pcmtap-helper&#96;) that does the real-time capture.
+- [pcmtap.requirements](pcmtap.requirements.html.md): &#96;check_requirements&#96;: what this machine still needs for pcmtap, and how to get it.
+- [pcmtap.stream](pcmtap.stream.html.md): Operations on a stream of PCM chunks (interleaved float32 &#96;bytes&#96;).
+- [pcmtap.tap](pcmtap.tap.html.md): A live tap on what processes are playing: a context manager yielding PCM chunks.
+- [pcmtap.write](pcmtap.write.html.md): Write a stream of PCM chunks to an audio file.
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.

@@ -1,0 +1,26 @@
+# pcmtap
+
+> Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps.
+
+
+## Pages
+
+- [pcmtap](index.html.md): Record what an app, or the whole Mac, is playing, as PCM audio. It uses Core Audio process taps (mac...
+- [API reference](api.html.md): | &#96;pcmtap&#96;   | Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps...
+- [pcmtap](_autosummary/pcmtap.html.md): Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps.
+- [pcmtap.base](_autosummary/pcmtap.base.html.md): &#96;record&#96;: what an app (or the whole Mac) plays, into an audio file, in one call.
+- [pcmtap.helper_build](_autosummary/pcmtap.helper_build.html.md): Find or build the native helper (&#96;pcmtap-helper&#96;) that does the real-time capture.
+- [pcmtap.requirements](_autosummary/pcmtap.requirements.html.md): &#96;check_requirements&#96;: what this machine still needs for pcmtap, and how to get it.
+- [pcmtap.stream](_autosummary/pcmtap.stream.html.md): Operations on a stream of PCM chunks (interleaved float32 &#96;bytes&#96;).
+- [pcmtap.tap](_autosummary/pcmtap.tap.html.md): A live tap on what processes are playing: a context manager yielding PCM chunks.
+- [pcmtap.write](_autosummary/pcmtap.write.html.md): Write a stream of PCM chunks to an audio file.
+- [For AI agents](ai-agents.html.md): &#96;pcmtap&#96; ships artifacts for coding agents alongside its code. This page lists
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-10 13:46 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+
+## Optional
+
+- [pcmtap.md](pcmtap.md): Complete documentation in a single file.
+
+## Build
+
+- [build_info.json](build_info.json): build provenance (commit, version, tool versions, whether the docs match the package)

@@ -1,0 +1,14 @@
+pcmtap.write
+============
+
+.. automodule:: pcmtap.write
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      write_audio
+      write_wav
+      write_with_ffmpeg
+   

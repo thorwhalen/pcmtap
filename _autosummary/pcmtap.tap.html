@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="ruby" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pcmtap.tap - pcmtap</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="pcmtap.write" href="pcmtap.write.html" /><link rel="prev" title="pcmtap.stream" href="pcmtap.stream.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="pcmtap.tap"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="pcmtap.tap.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>pcmtap</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/thorwhalen/pcmtap" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pcmtap.html">pcmtap</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pcmtap.base.html">pcmtap.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcmtap.helper_build.html">pcmtap.helper_build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcmtap.requirements.html">pcmtap.requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcmtap.stream.html">pcmtap.stream</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pcmtap.tap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcmtap.write.html">pcmtap.write</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ai-agents.html">For AI agents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#pcmtap.tap.AudioFormat"><code class="docutils literal notranslate"><span class="pre">AudioFormat</span></code></a><ul>
+<li><a class="reference internal" href="#pcmtap.tap.AudioFormat.frame_bytes"><code class="docutils literal notranslate"><span class="pre">AudioFormat.frame_bytes</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.AudioFormat.frames_to_bytes"><code class="docutils literal notranslate"><span class="pre">AudioFormat.frames_to_bytes()</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.AudioFormat.seconds_to_frames"><code class="docutils literal notranslate"><span class="pre">AudioFormat.seconds_to_frames()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pcmtap.tap.PermissionMissing"><code class="docutils literal notranslate"><span class="pre">PermissionMissing</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.SAMPLE_FORMAT"><code class="docutils literal notranslate"><span class="pre">SAMPLE_FORMAT</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.Tap"><code class="docutils literal notranslate"><span class="pre">Tap</span></code></a><ul>
+<li><a class="reference internal" href="#pcmtap.tap.Tap.close"><code class="docutils literal notranslate"><span class="pre">Tap.close()</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.Tap.open"><code class="docutils literal notranslate"><span class="pre">Tap.open()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pcmtap.tap.TapError"><code class="docutils literal notranslate"><span class="pre">TapError</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.audio_processes"><code class="docutils literal notranslate"><span class="pre">audio_processes()</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.permission_status"><code class="docutils literal notranslate"><span class="pre">permission_status()</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.request_permission"><code class="docutils literal notranslate"><span class="pre">request_permission()</span></code></a></li>
+<li><a class="reference internal" href="#pcmtap.tap.resolve_app"><code class="docutils literal notranslate"><span class="pre">resolve_app()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">pcmtap</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="pcmtap.html"><span itemprop="name">pcmtap</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">pcmtap.tap</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-pcmtap.tap">
+<span id="pcmtap-tap"></span><h1>pcmtap.tap<a class="headerlink" href="#module-pcmtap.tap" title="Link to this heading">#</a></h1>
+<p>A live tap on what processes are playing: a context manager yielding PCM chunks.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Tap</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="s2">"Spotify"</span><span class="p">,</span> <span class="n">mute</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tap</span><span class="p">:</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">tap</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">tap</span><span class="p">:</span>          <span class="c1"># bytes of interleaved float32 frames</span>
+</span><span data-line="4"><span class="gp">... </span>        <span class="o">...</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Tap</span></code> runs the native helper (<a class="reference internal" href="pcmtap.helper_build.html#module-pcmtap.helper_build" title="pcmtap.helper_build"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pcmtap.helper_build</span></code></a>) as a subprocess and
+reads its stdout. Chunks always hold whole frames.</p>
+<p class="rubric">Module Attributes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.tap.SAMPLE_FORMAT" title="pcmtap.tap.SAMPLE_FORMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SAMPLE_FORMAT</span></code></a></p></td>
+<td><p>Sample formats the helper emits (interleaved little-endian float32).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.tap.audio_processes" title="pcmtap.tap.audio_processes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">audio_processes</span></code></a>()</p></td>
+<td><p>The processes Core Audio knows: <code class="docutils literal notranslate"><span class="pre">pid</span></code>, <code class="docutils literal notranslate"><span class="pre">bundle_id</span></code>, <code class="docutils literal notranslate"><span class="pre">running_output</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pcmtap.tap.permission_status" title="pcmtap.tap.permission_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permission_status</span></code></a>()</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;granted&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;denied&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_determined&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;unknown&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.tap.request_permission" title="pcmtap.tap.request_permission"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_permission</span></code></a>()</p></td>
+<td><p>Ask macOS for <em>System Audio Recording</em> (a dialog on the Mac's screen); blocks until it is answered.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pcmtap.tap.resolve_app" title="pcmtap.tap.resolve_app"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve_app</span></code></a>(app)</p></td>
+<td><p>A bundle id (prefix) for <code class="docutils literal notranslate"><span class="pre">app</span></code>: a bundle id is kept; an app name is looked up.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.tap.AudioFormat" title="pcmtap.tap.AudioFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioFormat</span></code></a>(sample_rate, channels[, ...])</p></td>
+<td><p>The PCM layout of a tap's output.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pcmtap.tap.Tap" title="pcmtap.tap.Tap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tap</span></code></a>([app, pid, exclude, mute, seconds])</p></td>
+<td><p>Capture what processes play, as an iterator of PCM chunks (<code class="docutils literal notranslate"><span class="pre">bytes</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Exceptions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.tap.PermissionMissing" title="pcmtap.tap.PermissionMissing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PermissionMissing</span></code></a></p></td>
+<td><p>macOS has not granted <em>System Audio Recording</em> to pcmtap's helper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pcmtap.tap.TapError" title="pcmtap.tap.TapError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TapError</span></code></a></p></td>
+<td><p>The helper could not start or keep the tap.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="pcmtap.tap.AudioFormat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">AudioFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'f32le'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#AudioFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.AudioFormat" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The PCM layout of a tap’s output.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="pcmtap.tap.AudioFormat.frame_bytes">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">frame_bytes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><span class="pre">int</span></a></span><a class="headerlink" href="#pcmtap.tap.AudioFormat.frame_bytes" title="Link to this definition">#</a></dt>
+<dd><p>Bytes per frame (one sample of every channel).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pcmtap.tap.AudioFormat.frames_to_bytes">
+<span class="sig-name descname"><span class="pre">frames_to_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#AudioFormat.frames_to_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.AudioFormat.frames_to_bytes" title="Link to this definition">#</a></dt>
+<dd><p>How many bytes <code class="docutils literal notranslate"><span class="pre">frames</span></code> frames take.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pcmtap.tap.AudioFormat.seconds_to_frames">
+<span class="sig-name descname"><span class="pre">seconds_to_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#AudioFormat.seconds_to_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.AudioFormat.seconds_to_frames" title="Link to this definition">#</a></dt>
+<dd><p>How many frames <code class="docutils literal notranslate"><span class="pre">seconds</span></code> seconds take (rounded).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pcmtap.tap.PermissionMissing">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">PermissionMissing</span></span><a class="reference internal" href="../_modules/pcmtap/tap.html#PermissionMissing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.PermissionMissing" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pcmtap.tap.TapError" title="pcmtap.tap.TapError"><code class="xref py py-class docutils literal notranslate"><span class="pre">TapError</span></code></a></p>
+<p>macOS has not granted <em>System Audio Recording</em> to pcmtap’s helper.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pcmtap.tap.SAMPLE_FORMAT">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">SAMPLE_FORMAT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'f32le'</span></span><a class="headerlink" href="#pcmtap.tap.SAMPLE_FORMAT" title="Link to this definition">#</a></dt>
+<dd><p>Sample formats the helper emits (interleaved little-endian float32).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pcmtap.tap.Tap">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">Tap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#Tap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.Tap" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Capture what processes play, as an iterator of PCM chunks (<code class="docutils literal notranslate"><span class="pre">bytes</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <span class="highlight sphinx_autodoc_typehints-value"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="kc"><span class="pre">None</span></span></code></a></span>]</span>) – Bundle id(s) or app name(s) to record; all of their processes are
+included (<code class="docutils literal notranslate"><span class="pre">&quot;com.spotify.client&quot;</span></code> also matches its helper processes).</p></li>
+<li><p><strong>pid</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <span class="highlight sphinx_autodoc_typehints-value"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="kc"><span class="pre">None</span></span></code></a></span>]</span>) – Process id(s) to record.</p></li>
+<li><p><strong>exclude</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Record everything <em>except</em> the selected processes.</p></li>
+<li><p><strong>mute</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Silence the recorded processes on the speakers while recording.</p></li>
+<li><p><strong>seconds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <span class="highlight sphinx_autodoc_typehints-value"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="kc"><span class="pre">None</span></span></code></a></span></span>) – Stop after this long (otherwise when closed).</p></li>
+</ul>
+</dd>
+</dl>
+<p>With no <code class="docutils literal notranslate"><span class="pre">app</span></code> and no <code class="docutils literal notranslate"><span class="pre">pid</span></code>, records every process on the Mac.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pcmtap.tap.Tap.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#Tap.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.Tap.close" title="Link to this definition">#</a></dt>
+<dd><p>Stop the capture and the helper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><span class="highlight sphinx_autodoc_typehints-value"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="kc"><span class="pre">None</span></span></code></a></span></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pcmtap.tap.Tap.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#Tap.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.Tap.open" title="Link to this definition">#</a></dt>
+<dd><p>Start the helper and wait for it to report its audio format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#pcmtap.tap.Tap" title="pcmtap.tap.Tap"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tap</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pcmtap.tap.TapError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">TapError</span></span><a class="reference internal" href="../_modules/pcmtap/tap.html#TapError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.TapError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#RuntimeError" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></p>
+<p>The helper could not start or keep the tap.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcmtap.tap.audio_processes">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">audio_processes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#audio_processes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.audio_processes" title="Link to this definition">#</a></dt>
+<dd><p>The processes Core Audio knows: <code class="docutils literal notranslate"><span class="pre">pid</span></code>, <code class="docutils literal notranslate"><span class="pre">bundle_id</span></code>, <code class="docutils literal notranslate"><span class="pre">running_output</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcmtap.tap.permission_status">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">permission_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#permission_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.permission_status" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">&quot;granted&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;denied&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_determined&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;unknown&quot;</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcmtap.tap.request_permission">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">request_permission</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#request_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.request_permission" title="Link to this definition">#</a></dt>
+<dd><p>Ask macOS for <em>System Audio Recording</em> (a dialog on the Mac’s screen); blocks
+until it is answered. Returns whether it is granted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcmtap.tap.resolve_app">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.tap.</span></span><span class="sig-name descname"><span class="pre">resolve_app</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pcmtap/tap.html#resolve_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.tap.resolve_app" title="Link to this definition">#</a></dt>
+<dd><p>A bundle id (prefix) for <code class="docutils literal notranslate"><span class="pre">app</span></code>: a bundle id is kept; an app name is looked up.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">resolve_app</span><span class="p">(</span><span class="s2">"com.spotify.client"</span><span class="p">)</span>
+</span><span data-line="2"><span class="go">'com.spotify.client'</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="pcmtap.stream.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">pcmtap.stream</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="pcmtap.write.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">pcmtap.write</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/thorwhalen/pcmtap" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

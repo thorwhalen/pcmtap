@@ -1,0 +1,18 @@
+pcmtap.base
+===========
+
+.. automodule:: pcmtap.base
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      SILENCE_CHECK_S
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      record
+   

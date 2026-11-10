@@ -1,0 +1,27 @@
+pcmtap.helper\_build
+====================
+
+.. automodule:: pcmtap.helper_build
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      MIN_MACOS
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      build_helper
+      helper_dir
+      helper_path
+      macos_version
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      HelperUnavailable
+   

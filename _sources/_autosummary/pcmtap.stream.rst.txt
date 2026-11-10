@@ -1,0 +1,29 @@
+pcmtap.stream
+=============
+
+.. automodule:: pcmtap.stream
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      DEFAULT_SILENCE_THRESHOLD
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      peak
+      samples
+      skip_silence
+      take_frames
+      take_seconds
+      take_until
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      SilenceTimeout
+   

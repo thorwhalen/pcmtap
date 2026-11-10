@@ -1,0 +1,35 @@
+pcmtap.tap
+==========
+
+.. automodule:: pcmtap.tap
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      SAMPLE_FORMAT
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      audio_processes
+      permission_status
+      request_permission
+      resolve_app
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AudioFormat
+      Tap
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      PermissionMissing
+      TapError
+   
