@@ -1,4 +1,4 @@
-> built 2026-11-10 13:46 UTC from 8855268 (main) · pcmtap 0.0.1. Details: build_info.json
+> built 2026-11-10 14:04 UTC from f822d0f (main) · pcmtap 0.0.2. Details: build_info.json
 
 # index.html.md
 
@@ -113,17 +113,20 @@ Record what `app` (default: every process) plays into `path`; returns the path.
 Find or build the native helper (`pcmtap-helper`) that does the real-time capture.
 
 The helper is a small Swift program shipped as source (`pcmtap/helper/`) and
-compiled with `swiftc` on first use into [`helper_dir()`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.helper_dir), under a name that
-carries the source’s hash, so a new pcmtap version rebuilds it and an unchanged one
-never does. macOS keys the *System Audio Recording* permission to the binary, so a
-rebuild means granting it once more; keeping the build stable is the point.
+compiled with `swiftc` on first use into [`helper_dir()`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.helper_dir), always at the same
+path ([`HELPER_NAME`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.HELPER_NAME)), with the source’s hash in a sidecar file. A pcmtap
+version whose helper source changed rebuilds it in place; any other version reuses
+it. macOS keys the *System Audio Recording* permission to the binary’s path (and,
+for an ad hoc signature, its contents), so the stable path is what lets an upgrade
+that does not touch the helper keep the permission.
 
 Set `$PCMTAP_HELPER` to use a helper binary built elsewhere.
 
 ### Module Attributes
 
-| [`MIN_MACOS`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.MIN_MACOS)   | Process taps arrived in macOS 14.2.   |
-|--------------------------------------------------------------|---------------------------------------|
+| [`HELPER_NAME`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.HELPER_NAME)   | stable, because macOS keys the permission to its path.   |
+|----------------------------------------------------------------|----------------------------------------------------------|
+| [`MIN_MACOS`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.MIN_MACOS)     | Process taps arrived in macOS 14.2.                      |
 
 ### Functions
 
@@ -137,6 +140,13 @@ Set `$PCMTAP_HELPER` to use a helper binary built elsewhere.
 
 | [`HelperUnavailable`](_autosummary/pcmtap.helper_build.html.md#pcmtap.helper_build.HelperUnavailable)   | The native helper cannot be found or built on this machine.   |
 |----------------------------------------------------------------------|---------------------------------------------------------------|
+
+### pcmtap.helper_build.HELPER_NAME *= 'pcmtap-helper'*
+
+stable, because macOS keys the permission to its path.
+
+* **Type:**
+  The helper’s file name
 
 ### *exception* pcmtap.helper_build.HelperUnavailable
 
@@ -737,18 +747,16 @@ Encode `chunks` into `path` with ffmpeg (format from its extension).
 
 # About this build
 
-This documentation was built on **2026-11-10 13:46 UTC** from commit <a href="https://github.com/thorwhalen/pcmtap/commit/8855268e059acf76aecd872639810e0f965b2bfd"><code>8855268</code></a> on branch <code>main</code>, for **pcmtap 0.0.1** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-10 14:04 UTC** from commit <a href="https://github.com/thorwhalen/pcmtap/commit/f822d0f591ef035f88ac8b07c2e9bef87f46aeec"><code>f822d0f</code></a> on branch <code>main</code>, for **pcmtap 0.0.2** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.0.1) is behind the latest release on PyPI (0.0.2): `pip install pcmtap` gives newer code than these docs describe.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                          |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/thorwhalen/pcmtap/commit/8855268e059acf76aecd872639810e0f965b2bfd"><code>8855268e059acf76aecd872639810e0f965b2bfd</code></a> |
+| Commit              | <a href="https://github.com/thorwhalen/pcmtap/commit/f822d0f591ef035f88ac8b07c2e9bef87f46aeec"><code>f822d0f591ef035f88ac8b07c2e9bef87f46aeec</code></a> |
 | Branch              | <code>main</code>                                                                                                                                        |
 | Tags at this commit | none                                                                                                                                                     |
 | Working tree        | clean                                                                                                                                                    |
@@ -759,9 +767,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>thorwhalen/pcmtap</code>                                                             |
-| Run          | <a href="https://github.com/thorwhalen/pcmtap/actions/runs/42827372892">42827372892</a>    |
+| Run          | <a href="https://github.com/thorwhalen/pcmtap/actions/runs/42830159171">42830159171</a>    |
 | Ref          | <code>refs/heads/main</code>                                                               |
-| Event commit | <code>8855268e059acf76aecd872639810e0f965b2bfd</code> (in the history of the built commit) |
+| Event commit | <code>f822d0f591ef035f88ac8b07c2e9bef87f46aeec</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -786,13 +794,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/pcmtap/0.0.2/">0.0.2</a>, newer than the documented version (0.0.1).
+Latest release: <a href="https://pypi.org/project/pcmtap/0.0.2/">0.0.2</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/thorwhalen/pcmtap && cd pcmtap
-git checkout 8855268e059acf76aecd872639810e0f965b2bfd
+git checkout f822d0f591ef035f88ac8b07c2e9bef87f46aeec
 pip install "epythet==0.2.22"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

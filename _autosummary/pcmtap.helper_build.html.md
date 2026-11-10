@@ -3,17 +3,20 @@
 Find or build the native helper (`pcmtap-helper`) that does the real-time capture.
 
 The helper is a small Swift program shipped as source (`pcmtap/helper/`) and
-compiled with `swiftc` on first use into [`helper_dir()`](#pcmtap.helper_build.helper_dir), under a name that
-carries the source’s hash, so a new pcmtap version rebuilds it and an unchanged one
-never does. macOS keys the *System Audio Recording* permission to the binary, so a
-rebuild means granting it once more; keeping the build stable is the point.
+compiled with `swiftc` on first use into [`helper_dir()`](#pcmtap.helper_build.helper_dir), always at the same
+path ([`HELPER_NAME`](#pcmtap.helper_build.HELPER_NAME)), with the source’s hash in a sidecar file. A pcmtap
+version whose helper source changed rebuilds it in place; any other version reuses
+it. macOS keys the *System Audio Recording* permission to the binary’s path (and,
+for an ad hoc signature, its contents), so the stable path is what lets an upgrade
+that does not touch the helper keep the permission.
 
 Set `$PCMTAP_HELPER` to use a helper binary built elsewhere.
 
 ### Module Attributes
 
-| [`MIN_MACOS`](#pcmtap.helper_build.MIN_MACOS)   | Process taps arrived in macOS 14.2.   |
-|--------------------------------------------------------------|---------------------------------------|
+| [`HELPER_NAME`](#pcmtap.helper_build.HELPER_NAME)   | stable, because macOS keys the permission to its path.   |
+|----------------------------------------------------------------|----------------------------------------------------------|
+| [`MIN_MACOS`](#pcmtap.helper_build.MIN_MACOS)     | Process taps arrived in macOS 14.2.                      |
 
 ### Functions
 
@@ -27,6 +30,13 @@ Set `$PCMTAP_HELPER` to use a helper binary built elsewhere.
 
 | [`HelperUnavailable`](#pcmtap.helper_build.HelperUnavailable)   | The native helper cannot be found or built on this machine.   |
 |----------------------------------------------------------------------|---------------------------------------------------------------|
+
+### pcmtap.helper_build.HELPER_NAME *= 'pcmtap-helper'*
+
+stable, because macOS keys the permission to its path.
+
+* **Type:**
+  The helper’s file name
 
 ### *exception* pcmtap.helper_build.HelperUnavailable
 

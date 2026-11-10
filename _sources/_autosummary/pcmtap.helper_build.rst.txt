@@ -8,6 +8,7 @@ pcmtap.helper\_build
 
    .. autosummary::
    
+      HELPER_NAME
       MIN_MACOS
    
    .. rubric:: Functions

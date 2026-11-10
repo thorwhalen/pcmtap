@@ -1,32 +1,32 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-10T13:46:12Z",
+  "built_at": "2026-11-10T14:04:13Z",
   "package": {
     "name": "pcmtap",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "display_name": "pcmtap",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "8855268e059acf76aecd872639810e0f965b2bfd",
-    "short_commit": "8855268",
+    "commit": "f822d0f591ef035f88ac8b07c2e9bef87f46aeec",
+    "short_commit": "f822d0f",
     "branch": "main",
     "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/thorwhalen/pcmtap",
-    "commit_url": "https://github.com/thorwhalen/pcmtap/commit/8855268e059acf76aecd872639810e0f965b2bfd",
+    "commit_url": "https://github.com/thorwhalen/pcmtap/commit/f822d0f591ef035f88ac8b07c2e9bef87f46aeec",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "thorwhalen/pcmtap",
-    "sha": "8855268e059acf76aecd872639810e0f965b2bfd",
+    "sha": "f822d0f591ef035f88ac8b07c2e9bef87f46aeec",
     "sha_in_history": true,
     "ref": "refs/heads/main",
     "ref_name": "main",
-    "run_id": "42827372892",
-    "run_url": "https://github.com/thorwhalen/pcmtap/actions/runs/42827372892",
+    "run_id": "42830159171",
+    "run_url": "https://github.com/thorwhalen/pcmtap/actions/runs/42830159171",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -56,20 +56,18 @@
   },
   "site": {
     "modules_documented": 7,
-    "objects_documented": 58
+    "objects_documented": 59
   },
   "pypi": {
     "checked": true,
     "latest": "0.0.2",
-    "relation": "behind",
+    "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/thorwhalen/pcmtap && cd pcmtap\ngit checkout 8855268e059acf76aecd872639810e0f965b2bfd\npip install \"epythet==0.2.22\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/thorwhalen/pcmtap && cd pcmtap\ngit checkout f822d0f591ef035f88ac8b07c2e9bef87f46aeec\npip install \"epythet==0.2.22\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
-    "aligned": false,
-    "notes": [
-      "The documented version (0.0.1) is behind the latest release on PyPI (0.0.2): `pip install pcmtap` gives newer code than these docs describe."
-    ]
+    "aligned": true,
+    "notes": []
   }
 }

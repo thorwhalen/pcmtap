@@ -15,7 +15,7 @@
 - [pcmtap.tap](_autosummary/pcmtap.tap.html.md): A live tap on what processes are playing: a context manager yielding PCM chunks.
 - [pcmtap.write](_autosummary/pcmtap.write.html.md): Write a stream of PCM chunks to an audio file.
 - [For AI agents](ai-agents.html.md): &#96;pcmtap&#96; ships artifacts for coding agents alongside its code. This page lists
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-10 13:46 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-10 14:04 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
 
 ## Optional
 

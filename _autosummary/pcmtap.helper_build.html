@@ -89,6 +89,7 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#pcmtap.helper_build.HELPER_NAME"><code class="docutils literal notranslate"><span class="pre">HELPER_NAME</span></code></a></li>
 <li><a class="reference internal" href="#pcmtap.helper_build.HelperUnavailable"><code class="docutils literal notranslate"><span class="pre">HelperUnavailable</span></code></a></li>
 <li><a class="reference internal" href="#pcmtap.helper_build.MIN_MACOS"><code class="docutils literal notranslate"><span class="pre">MIN_MACOS</span></code></a></li>
 <li><a class="reference internal" href="#pcmtap.helper_build.build_helper"><code class="docutils literal notranslate"><span class="pre">build_helper()</span></code></a></li>
@@ -137,16 +138,21 @@ data-aria-dark="Switch to auto color mode">
 <span id="pcmtap-helper-build"></span><h1>pcmtap.helper_build<a class="headerlink" href="#module-pcmtap.helper_build" title="Link to this heading">#</a></h1>
 <p>Find or build the native helper (<code class="docutils literal notranslate"><span class="pre">pcmtap-helper</span></code>) that does the real-time capture.</p>
 <p>The helper is a small Swift program shipped as source (<code class="docutils literal notranslate"><span class="pre">pcmtap/helper/</span></code>) and
-compiled with <code class="docutils literal notranslate"><span class="pre">swiftc</span></code> on first use into <a class="reference internal" href="#pcmtap.helper_build.helper_dir" title="pcmtap.helper_build.helper_dir"><code class="xref py py-func docutils literal notranslate"><span class="pre">helper_dir()</span></code></a>, under a name that
-carries the source’s hash, so a new pcmtap version rebuilds it and an unchanged one
-never does. macOS keys the <em>System Audio Recording</em> permission to the binary, so a
-rebuild means granting it once more; keeping the build stable is the point.</p>
+compiled with <code class="docutils literal notranslate"><span class="pre">swiftc</span></code> on first use into <a class="reference internal" href="#pcmtap.helper_build.helper_dir" title="pcmtap.helper_build.helper_dir"><code class="xref py py-func docutils literal notranslate"><span class="pre">helper_dir()</span></code></a>, always at the same
+path (<a class="reference internal" href="#pcmtap.helper_build.HELPER_NAME" title="pcmtap.helper_build.HELPER_NAME"><code class="xref py py-data docutils literal notranslate"><span class="pre">HELPER_NAME</span></code></a>), with the source’s hash in a sidecar file. A pcmtap
+version whose helper source changed rebuilds it in place; any other version reuses
+it. macOS keys the <em>System Audio Recording</em> permission to the binary’s path (and,
+for an ad hoc signature, its contents), so the stable path is what lets an upgrade
+that does not touch the helper keep the permission.</p>
 <p>Set <code class="docutils literal notranslate"><span class="pre">$PCMTAP_HELPER</span></code> to use a helper binary built elsewhere.</p>
 <p class="rubric">Module Attributes</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.helper_build.MIN_MACOS" title="pcmtap.helper_build.MIN_MACOS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MIN_MACOS</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pcmtap.helper_build.HELPER_NAME" title="pcmtap.helper_build.HELPER_NAME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HELPER_NAME</span></code></a></p></td>
+<td><p>stable, because macOS keys the permission to its path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pcmtap.helper_build.MIN_MACOS" title="pcmtap.helper_build.MIN_MACOS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MIN_MACOS</span></code></a></p></td>
 <td><p>Process taps arrived in macOS 14.2.</p></td>
 </tr>
 </tbody>
@@ -181,6 +187,17 @@ rebuild means granting it once more; keeping the build stable is the point.</p>
 </tbody>
 </table>
 </div>
+<dl class="py data">
+<dt class="sig sig-object py" id="pcmtap.helper_build.HELPER_NAME">
+<span class="sig-prename descclassname"><span class="pre">pcmtap.helper_build.</span></span><span class="sig-name descname"><span class="pre">HELPER_NAME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pcmtap-helper'</span></span><a class="headerlink" href="#pcmtap.helper_build.HELPER_NAME" title="Link to this definition">#</a></dt>
+<dd><p>stable, because macOS keys the permission to its path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The helper’s file name</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="pcmtap.helper_build.HelperUnavailable">
 <span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pcmtap.helper_build.</span></span><span class="sig-name descname"><span class="pre">HelperUnavailable</span></span><a class="reference internal" href="../_modules/pcmtap/helper_build.html#HelperUnavailable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pcmtap.helper_build.HelperUnavailable" title="Link to this definition">#</a></dt>
@@ -280,7 +297,7 @@ rebuild means granting it once more; keeping the build stable is the point.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/documentation_options.js?v=e3a6060d"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
