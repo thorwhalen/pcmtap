@@ -105,3 +105,31 @@ def test_cli_list(fake_helper, capsys):
 
     assert main(["list", "--playing"]) == 0
     assert json.loads(capsys.readouterr().out)[0]["pid"] == 1
+
+
+def test_helper_path_is_stable_and_rebuilds_only_on_source_change(
+    tmp_path, monkeypatch
+):
+    import pcmtap.helper_build as hb
+
+    monkeypatch.delenv("PCMTAP_HELPER", raising=False)
+    monkeypatch.setenv("PCMTAP_DATA_DIR", str(tmp_path))
+    monkeypatch.setattr(hb, "_require_platform", lambda: None)
+    builds = []
+
+    def fake_build(target):
+        builds.append(target)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("bin")
+        return target
+
+    monkeypatch.setattr(hb, "build_helper", fake_build)
+    hb.helper_path.cache_clear()
+    first = hb.helper_path()
+    hb.helper_path.cache_clear()
+    assert hb.helper_path() == first == tmp_path / "bin" / "pcmtap-helper"
+    assert len(builds) == 1
+    monkeypatch.setattr(hb, "_source_hash", lambda: "changed")
+    hb.helper_path.cache_clear()
+    assert hb.helper_path() == first and len(builds) == 2  # rebuilt in place
+    hb.helper_path.cache_clear()
