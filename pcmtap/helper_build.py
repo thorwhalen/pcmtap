@@ -1,10 +1,12 @@
 """Find or build the native helper (``pcmtap-helper``) that does the real-time capture.
 
 The helper is a small Swift program shipped as source (``pcmtap/helper/``) and
-compiled with ``swiftc`` on first use into :func:`helper_dir`, under a name that
-carries the source's hash, so a new pcmtap version rebuilds it and an unchanged one
-never does. macOS keys the *System Audio Recording* permission to the binary, so a
-rebuild means granting it once more; keeping the build stable is the point.
+compiled with ``swiftc`` on first use into :func:`helper_dir`, always at the same
+path (:data:`HELPER_NAME`), with the source's hash in a sidecar file. A pcmtap
+version whose helper source changed rebuilds it in place; any other version reuses
+it. macOS keys the *System Audio Recording* permission to the binary's path (and,
+for an ad hoc signature, its contents), so the stable path is what lets an upgrade
+that does not touch the helper keep the permission.
 
 Set ``$PCMTAP_HELPER`` to use a helper binary built elsewhere.
 """
@@ -23,6 +25,8 @@ HELPER_SOURCE_DIR = Path(__file__).parent / "helper"
 HELPER_SOURCE = HELPER_SOURCE_DIR / "pcmtap_helper.swift"
 HELPER_PLIST = HELPER_SOURCE_DIR / "Info.plist"
 HELPER_SIGNING_ID = "com.thorwhalen.pcmtap-helper"
+#: The helper's file name: stable, because macOS keys the permission to its path.
+HELPER_NAME = "pcmtap-helper"
 #: Process taps arrived in macOS 14.2.
 MIN_MACOS = (14, 2)
 
@@ -101,7 +105,11 @@ def helper_path(*, rebuild: bool = False) -> Path:
             raise HelperUnavailable(f"$PCMTAP_HELPER points at nothing: {path}")
         return path
     _require_platform()
-    target = helper_dir() / f"pcmtap-helper-{_source_hash()}"
-    if rebuild or not target.is_file():
+    target = helper_dir() / HELPER_NAME
+    stamp = target.with_name(f"{HELPER_NAME}.source-hash")
+    wanted = _source_hash()
+    current = stamp.read_text().strip() if stamp.is_file() else None
+    if rebuild or not target.is_file() or current != wanted:
         build_helper(target)
+        stamp.write_text(wanted)
     return target
