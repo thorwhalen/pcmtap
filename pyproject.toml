@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pcmtap"
-version = "0.0.2"
+version = "0.0.3"
 description = "Record what an app (or the whole Mac) is playing, as PCM, via Core Audio process taps."
 readme = "README.md"
 requires-python = ">=3.10"
